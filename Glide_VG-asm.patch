@@ -5,7 +5,7 @@
  
  	.align 4
 -\(.data)
-+.data
++.section	.data
  One		.DATA 0x03f800000
  Area		.DATA 0
  dxAB		.DATA 0
