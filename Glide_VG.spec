@@ -7,6 +7,7 @@ License:	3DFX GLIDE Source Code General Public License
 Vendor:		3Dfx Interactive Inc.
 Group:		Libraries
 Source0:	Glide%{version}.tar.gz
+# Source0-md5:	be7762636b46cb04b238a16f45cfcfa8
 Patch0:		%{name}-asm.patch
 Icon:		3dfx.gif
 URL:		http://www.3dfx.com/
