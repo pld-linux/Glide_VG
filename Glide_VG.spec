@@ -1,25 +1,32 @@
-Summary:	Glide runtime for 3Dfx Voodoo Banshee and Voodoo3 boards
-Summary(pl):	¶rodowisko Glide dla kart 3Dfx Voodoo Banschee i Voodoo3
+Summary:	Glide runtime for 3Dfx Voodoo Graphics boards
+Summary(pl):	¶rodowisko Glide dla kart 3Dfx Voodoo Graphics
 Name:		Glide_VG
 Version:	2.46
 Release:	4
+License:	3DFX GLIDE Source Code General Public License
+Vendor:		3Dfx Interactive Inc.
 Group:		Libraries
 Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
-Copyright:	3DFX GLIDE Source Code General Public License
-URL:		http://www.3dfx.com	
+Group(pt_BR):	Bibliotecas
+Group(ru):	‚…¬Ã…œ‘≈À…
+Group(uk):	‚¶¬Ã¶œ‘≈À…
 Source0:	Glide%{version}.tar.gz
 Patch0:		%{name}-asm.patch
-Vendor:		3Dfx Interactive Inc.
 Icon:		3dfx.gif
+URL:		http://www.3dfx.com	
 BuildRequires:	XFree86-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-This library allows the user to use a 3dfx Interactive Voodoo Graphics
+This library allows the user to use a 3Dfx Interactive Voodoo Graphics
 card under Linux.
+
+%description -l pl
+Ten pakiet pozwala na uøywanie kart 3Dfx Interactive Voodoo Graphics
+pod Linuksem.
 
 %package -n Glide2x_SDK
 Summary:	Development libraries for Glide 2.x
@@ -27,13 +34,22 @@ Summary(pl):	CzÍ∂Ê Glide 2.x przeznaczona dla programistÛw
 Version:	2.1
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
+Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
 
 %description -n Glide2x_SDK
 This package includes the headers files, documentation, and test files
 necessary for developing applications that use the 3Dfx Interactive
 Voodoo Graphics, Voodoo Rush, or Voodoo2 card.
+
+%description -n Glide2x_SDK -l pl
+Ten pakiet zawiera pliki nag≥Ûwkowe, dokumentacjÍ i pliki testowe
+potrzebne do tworzenia aplikacji uøywaj±cych kart 3Dfx Interactive
+Voodoo Graphics, Voodoo Rush lub Voodoo2.
 
 %prep
 %setup -q -c
@@ -90,8 +106,8 @@ gzip -9nf glide_license.txt
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
