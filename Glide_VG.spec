@@ -2,7 +2,7 @@ Summary:	Glide runtime for 3Dfx Voodoo Graphics boards
 Summary(pl):	¦rodowisko Glide dla kart 3Dfx Voodoo Graphics
 Name:		Glide_VG
 Version:	2.46
-Release:	4
+Release:	5
 License:	3DFX GLIDE Source Code General Public License
 Vendor:		3Dfx Interactive Inc.
 Group:		Libraries
