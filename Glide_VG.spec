@@ -16,6 +16,9 @@ BuildRoot: /usr/tmp/Glide
 %description
 This library allows the user to use a 3dfx Interactive Voodoo Banshee or Voodoo3 card under Linux.
 
+%description -l pl
+Dziêki tej bibliotece mozna uzywaæ kart Voodoo Banshee i Voodoo3 firmy 3dfx Interactive w systemie Linux.
+
 %package -n Glide2x_SDK
 Summary: Development libraries for Glide 2.x
 Version: 2.1
