@@ -47,13 +47,14 @@ Voodoo Graphics, Voodoo Rush lub Voodoo2.
 chmod +x swlibs/include/make/ostype
 
 %build
-%{__make} -f makefile.unix CNODEBUG="%{rpmcflags} %{!?debug:-fomit-frame-pointer} \
-	%{!?debug:-funroll-loops -fexpensive-optimizations -ffast-math} -I%{_prefix}/X11R6/include"
+%{__make} -f makefile.unix \
+	CNODEBUG="%{rpmcflags} %{!?debug:-fomit-frame-pointer} \
+	%{!?debug:-funroll-loops -fexpensive-optimizations -ffast-math} -I/usr/X11R6/include"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir},%{_includedir}/glide} \
-	$RPM_BUILD_ROOT%{_prefix}/src/examples/glide/{tests,texus/{lib,cmd,examples}}
+	$RPM_BUILD_ROOT%{_examplesdir}/glide/{tests,texus/{lib,cmd,examples}}
 
 # Install the glibc 2.1 libraries normally
 install sst1/lib/libglide2x.so $RPM_BUILD_ROOT%{_libdir}/libglide2x_VG.so
@@ -75,21 +76,21 @@ install swlibs/include/linutil.h $RPM_BUILD_ROOT%{_includedir}/glide
 install swlibs/include/texus.h $RPM_BUILD_ROOT%{_includedir}/glide
 
 # Install the examples and their source
-install sst1/glide/tests/makefile.distrib $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/tests/makefile
-install sst1/glide/tests/*.3df $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/tests
-install sst1/glide/tests/test??.c $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/tests
-install sst1/glide/tests/tldata.inc $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/tests
-install sst1/glide/tests/tlib.[ch] $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/tests
+install sst1/glide/tests/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide/tests/makefile
+install sst1/glide/tests/*.3df $RPM_BUILD_ROOT%{_examplesdir}/glide/tests
+install sst1/glide/tests/test??.c $RPM_BUILD_ROOT%{_examplesdir}/glide/tests
+install sst1/glide/tests/tldata.inc $RPM_BUILD_ROOT%{_examplesdir}/glide/tests
+install sst1/glide/tests/tlib.[ch] $RPM_BUILD_ROOT%{_examplesdir}/glide/tests
 
 # Install the texture tools source
-install swlibs/texus/makefile.distrib $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/texus/makefile
-install swlibs/texus/lib/makefile.distrib $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/texus/lib/makefile
-install swlibs/texus/cmd/makefile.distrib $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/texus/cmd/makefile
-install swlibs/texus/examples/makefile.distrib $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/texus/examples/makefile
-install swlibs/texus/lib/*.c $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/texus/lib
-install swlibs/texus/lib/texusint.h $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/texus/lib
-install swlibs/texus/cmd/*.c $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/texus/cmd
-install swlibs/texus/examples/*.c $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/texus/examples
+install swlibs/texus/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/makefile
+install swlibs/texus/lib/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/lib/makefile
+install swlibs/texus/cmd/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/cmd/makefile
+install swlibs/texus/examples/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/examples/makefile
+install swlibs/texus/lib/*.c $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/lib
+install swlibs/texus/lib/texusint.h $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/lib
+install swlibs/texus/cmd/*.c $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/cmd
+install swlibs/texus/examples/*.c $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/examples
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -109,5 +110,5 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Glide2x_SDK
 %defattr(644,root,root,755)
 %doc docs/*.pdf
-%{_prefix}/src/examples/glide
+%{_examplesdir}/glide
 %{_includedir}/glide
