@@ -87,8 +87,6 @@ install swlibs/texus/lib/texusint.h $RPM_BUILD_ROOT%{_prefix}/src/examples/glide
 install swlibs/texus/cmd/*.c $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/texus/cmd
 install swlibs/texus/examples/*.c $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/texus/examples
 
-gzip -9nf glide_license.txt
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -97,7 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc glide_license.txt.gz
+%doc glide_license.txt
 %attr(755,root,root) %{_bindir}/texus
 %attr(755,root,root) %{_bindir}/test3Dfx
 %attr(755,root,root) %{_libdir}/libglide2x.so
