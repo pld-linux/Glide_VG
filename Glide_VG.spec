@@ -10,6 +10,7 @@ Source0:	Glide%{version}.tar.gz
 Patch0:		%{name}-asm.patch
 Icon:		3dfx.gif
 URL:		http://www.3dfx.com/
+BuildRequires:	/usr/bin/gasp
 BuildRequires:	XFree86-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
