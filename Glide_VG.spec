@@ -55,7 +55,7 @@ Voodoo Graphics, Voodoo Rush lub Voodoo2.
 chmod +x swlibs/include/make/ostype
 
 %build
-%{__make} -f makefile.unix \
+%{__make} -j1 -f makefile.unix \
 	CNODEBUG="%{rpmcflags} -fPIC %{!?debug:-fomit-frame-pointer} \
 	%{!?debug:-funroll-loops -fexpensive-optimizations -ffast-math} -I/usr/X11R6/include" \
 %ifnarch %{ix86}
