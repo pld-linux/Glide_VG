@@ -9,7 +9,7 @@ Group:		Libraries
 Source0:	Glide%{version}.tar.gz
 Patch0:		%{name}-asm.patch
 Icon:		3dfx.gif
-URL:		http://www.3dfx.com	
+URL:		http://www.3dfx.com/
 BuildRequires:	XFree86-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -48,8 +48,8 @@ chmod +x swlibs/include/make/ostype
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir},%{_includedir}/glide}
-install -d $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/{tests,texus/{lib,cmd,examples}}
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir},%{_includedir}/glide} \
+	$RPM_BUILD_ROOT%{_prefix}/src/examples/glide/{tests,texus/{lib,cmd,examples}}
 
 # Install the glibc 2.1 libraries normally
 install sst1/lib/libglide2x.so $RPM_BUILD_ROOT%{_libdir}/libglide2x_VG.so
