@@ -1,0 +1,11 @@
+--- Glide_VG-2.46/sst1/glide/src/xdraw.s~	Mon Nov 29 20:48:01 1999
++++ Glide_VG-2.46/sst1/glide/src/xdraw.s	Sat May 20 21:24:20 2000
+@@ -54,7 +54,7 @@
+ # fmuls   TEXTEQU <fmul DWORD PTR>
+ 
+ 	.align 4
+-\(.data)
++.data
+ One		.DATA 0x03f800000
+ Area		.DATA 0
+ dxAB		.DATA 0
