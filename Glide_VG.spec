@@ -1,12 +1,17 @@
 Summary:	Glide runtime for 3Dfx Voodoo Banshee and Voodoo3 boards
+Summary(pl):	¦rodowisko Glide dla kart 3Dfx Voodoo Banschee i Voodoo3
 Name:		Glide_VG
 Version:	2.46
 Release:	4
 Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
+Group(fr):	Librairies
+Group(pl):	Biblioteki
 Copyright:	3DFX GLIDE Source Code General Public License
 URL:		http://www.3dfx.com	
-Source:		Glide2.46.tar.gz
-Patch:		Glide_VG-asm.patch
+Source0:	Glide%{version}.tar.gz
+Patch0:		%{name}-asm.patch
 Vendor:		3Dfx Interactive Inc.
 Icon:		3dfx.gif
 BuildRequires:	XFree86-devel
@@ -18,8 +23,12 @@ card under Linux.
 
 %package -n Glide2x_SDK
 Summary:	Development libraries for Glide 2.x
+Summary(pl):	Czê¶æ Glide 2.x przeznaczona dla programistów
 Version:	2.1
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
 
 %description -n Glide2x_SDK
 This package includes the headers files, documentation, and test files
@@ -32,8 +41,8 @@ Voodoo Graphics, Voodoo Rush, or Voodoo2 card.
 chmod +x swlibs/include/make/ostype
 
 %build
-%{__make} -f makefile.unix CNODEBUG="$RPM_OPT_FLAGS -fomit-frame-pointer \
-	-funroll-loops -fexpensive-optimizations -ffast-math -I/usr/X11R6/include"
+%{__make} -f makefile.unix CNODEBUG="%{rpmcflags} %{!?debug:-fomit-frame-pointer} \
+	%{!?debug:-funroll-loops -fexpensive-optimizations -ffast-math} -I%{_prefix}/X11R6/include"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -41,13 +50,13 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir},%{_includedir}/glide}
 install -d $RPM_BUILD_ROOT%{_prefix}/src/examples/glide/{tests,texus/{lib,cmd,examples}}
 
 # Install the glibc 2.1 libraries normally
-install -s sst1/lib/libglide2x.so $RPM_BUILD_ROOT%{_libdir}/libglide2x_VG.so
-install -s swlibs/lib/libtexus.so $RPM_BUILD_ROOT%{_libdir}
-ln -s libglide2x_VG.so $RPM_BUILD_ROOT%{_libdir}/libglide2x.so
+install sst1/lib/libglide2x.so $RPM_BUILD_ROOT%{_libdir}/libglide2x_VG.so
+install swlibs/lib/libtexus.so $RPM_BUILD_ROOT%{_libdir}
+ln -sf libglide2x_VG.so $RPM_BUILD_ROOT%{_libdir}/libglide2x.so
 
 # Install the executables
-install -s swlibs/bin/texus $RPM_BUILD_ROOT%{_bindir}
-install -s sst1/glide/tests/test00 $RPM_BUILD_ROOT%{_bindir}/test3Dfx
+install swlibs/bin/texus $RPM_BUILD_ROOT%{_bindir}
+install sst1/glide/tests/test00 $RPM_BUILD_ROOT%{_bindir}/test3Dfx
 
 # Install the headers
 install swlibs/include/3dfx.h $RPM_BUILD_ROOT%{_includedir}/glide
