@@ -31,7 +31,7 @@ Voodoo Graphics, Voodoo Rush, or Voodoo2 card.
 chmod +x swlibs/include/make/ostype
 
 %build
-make -f makefile.unix CNODEBUG="$RPM_OPT_FLAGS -fomit-frame-pointer \
+%{__make} -f makefile.unix CNODEBUG="$RPM_OPT_FLAGS -fomit-frame-pointer \
 	-funroll-loops -fexpensive-optimizations -ffast-math"
 
 %install
