@@ -2,7 +2,7 @@ Summary:	Glide runtime for 3Dfx Voodoo Graphics boards
 Summary(pl):	¦rodowisko Glide dla kart 3Dfx Voodoo Graphics
 Name:		Glide_VG
 Version:	2.46
-Release:	7
+Release:	8
 License:	3DFX GLIDE Source Code General Public License
 Vendor:		3Dfx Interactive Inc.
 Group:		Libraries
@@ -12,6 +12,7 @@ Patch0:		%{name}-asm.patch
 Patch1:		%{name}-opt.patch
 Patch2:		%{name}-morearchs.patch
 Patch3:		%{name}-ioctl.patch
+Patch4:		%{name}-soname.patch
 Icon:		3dfx.gif
 URL:		http://www.3dfx.com/
 %ifarch %{ix86}
@@ -50,6 +51,7 @@ Voodoo Graphics, Voodoo Rush lub Voodoo2.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 chmod +x swlibs/include/make/ostype
 
 %build
@@ -90,6 +92,7 @@ install sst1/glide/tests/*.3df $RPM_BUILD_ROOT%{_examplesdir}/glide/tests
 install sst1/glide/tests/test??.c $RPM_BUILD_ROOT%{_examplesdir}/glide/tests
 install sst1/glide/tests/tldata.inc $RPM_BUILD_ROOT%{_examplesdir}/glide/tests
 install sst1/glide/tests/tlib.[ch] $RPM_BUILD_ROOT%{_examplesdir}/glide/tests
+gzip -9nf $RPM_BUILD_ROOT%{_examplesdir}/glide/tests/*.3df
 
 # Install the texture tools source
 install swlibs/texus/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/makefile
