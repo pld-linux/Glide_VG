@@ -1,0 +1,96 @@
+--- Glide_VG-2.46/sst1/init/initvg/sst1init.h.orig	1999-11-29 20:48:02.000000000 +0100
++++ Glide_VG-2.46/sst1/init/initvg/sst1init.h	2004-01-18 11:13:11.026782482 +0100
+@@ -156,14 +156,24 @@
+ 
+ #define P6FENCE {_asm xchg eax, p6FenceVar}
+ 
+-#elif defined(__GNUC__)
+-#if defined(__i386__)
++#elif defined(__GNUC__) && defined(__i386__)
+ #define P6FENCE asm("xchg %%eax,%0" \
+ 		    : /* no outputs */ \
+ 		    : "m" (p6FenceVar) \
+ 		    : "eax" \
+ 		    );
+-#endif
++#elif defined(__ia64__)
++#define P6FENCE asm volatile ("mf.a" ::: "memory");
++#elif defined(__alpha__)
++# define P6FENCE asm volatile("mb" ::: "memory");
++#elif defined(__powerpc__)
++# define P6FENCE asm volatile ("sync" ::: "memory");
++#elif defined (__x86_64__)
++# define P6FENCE asm volatile("mfence" ::: "memory");
++#elif defined(__sparc64__)
++# define P6FENCE asm volatile("membar #LoadLoad | #LoadStore | #StoreStore | #StoreLoad" ::: "memory");
++#elif defined(__sparc__)
++# define P6FENCE asm volatile("" ::: "memory");
+ #else
+ #error "P6 Fencing in-line assembler code needs to be added for this compiler"
+ #endif  
+--- Glide_VG-2.46/swlibs/fxpci/pcilib/fxpci.c.orig	1999-11-29 20:48:02.000000000 +0100
++++ Glide_VG-2.46/swlibs/fxpci/pcilib/fxpci.c	2004-01-18 11:00:53.731282699 +0100
+@@ -31,7 +31,6 @@
+ #include <fxdll.h>
+ #include "fxpci.h"
+ #ifdef __linux__
+-#include <asm/io.h>
+ #include "fxlinux.h"
+ #else
+ #include <fxmemmap.h>
+--- Glide_VG-2.46/swlibs/fxpci/pcilib/fxlinux.c.orig	1999-11-29 20:48:02.000000000 +0100
++++ Glide_VG-2.46/swlibs/fxpci/pcilib/fxlinux.c	2004-01-18 11:04:05.617826712 +0100
+@@ -26,7 +26,17 @@
+ #include <sys/stat.h>
+ #include <sys/mman.h>
+ #include <sys/ioctl.h>
+-#include <asm/io.h>
++#if defined(__powerpc__) || defined(__sparc__)
++#define iopl(X) (-1)
++#define inb(P) 0
++#define inw(P) 0
++#define inl(P) 0
++#define outb(D,P)
++#define outw(D,P)
++#define outl(D,P)
++#else
++#include <sys/io.h>
++#endif
+ #include <fcntl.h>
+ #include "fxpci.h"
+ #include "pcilib.h"
+--- Glide_VG-2.46/sst1/glide/src/cpudetect.c.orig	1999-11-29 20:48:01.000000000 +0100
++++ Glide_VG-2.46/sst1/glide/src/cpudetect.c	2004-01-18 11:21:11.005578980 +0100
+@@ -22,6 +22,7 @@
+ #include <stdio.h>
+ 
+ int _cpu_detect_asm() {
++#ifdef __i386__
+   struct utsname name;
+ 
+   uname(&name);
+@@ -31,17 +32,24 @@
+   if (!strcmp(name.machine, "i686")) return 6;
+   fprintf(stderr, "Couldn't determine cpu type. Using i586\n");
+   return 5;
++#else
++  return 0;
++#endif
+ }
+ 
+ void single_precision_asm() {
++#ifdef __i386__
+   asm("push %eax \n fnclex \n fstcw (%esp) \n movl (%esp), %eax \n "
+       "and $0x0000fcff, %eax \n movl %eax, (%esp) \n fldcw (%esp) \n pop %eax");
++#endif
+ }
+ 
+ 
+ void double_precision_asm() {
++#ifdef __i386__
+   asm("push %eax \n fnclex \n fstcw (%esp) \n movw (%esp), %eax \n "
+       "and $0x0000fcff, %eax \n or $0x000002ff, %eax \n mov %eax, (%esp) \n "
+       "fldcw (%esp) \n pop %eax");
++#endif
+ }
+ 
