@@ -1,0 +1,10 @@
+--- Glide_VG-2.46/swlibs/include/make/3dfx.mak.orig	1999-11-29 20:48:02.000000000 +0100
++++ Glide_VG-2.46/swlibs/include/make/3dfx.mak	2004-04-24 17:27:44.802468880 +0200
+@@ -194,6 +194,7 @@
+ 
+ $(SHARED_LIBRARY): $(LIBPARTS) $(SUBLIBRARIES)
+ 	$(LINK) $(LDFLAGS) -shared -o $(SHARED_LIBRARY) \
++		-Xlinker -soname=$(SHARED_LIBRARY) \
+ 		-Xlinker --whole-archive \
+ 		$(LIBRARIES) $(SUBLIBRARIES) \
+ 		-Xlinker --no-whole-archive \
