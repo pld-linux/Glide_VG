@@ -9,6 +9,7 @@ Source:		Glide2.46.tar.gz
 Patch:		Glide_VG-asm.patch
 Vendor:		3Dfx Interactive Inc.
 Icon:		3dfx.gif
+BuildRequires:	XFree86-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
