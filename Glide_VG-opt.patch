@@ -1,0 +1,9 @@
+--- Glide_VG-2.46/sst1/init/initvg/makefile.unix.orig	Mon Nov 29 20:48:02 1999
++++ Glide_VG-2.46/sst1/init/initvg/makefile.unix	Thu Jul 17 15:43:49 2003
+@@ -51,6 +51,3 @@
+ # This library must be compiled without the big optimization options
+ # for some strange reason
+ #
+-ifndef DEBUG
+-CFLAGS = -O -m486 -fomit-frame-pointer $(LCDEFS) $(LCOPTS) $(LCINC)
+-endif
