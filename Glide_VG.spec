@@ -11,7 +11,7 @@ Vendor: 3Dfx Interactive Inc.
 Packager: Joseph Kain <joseph@3dfx.com>
 Group: Libraries
 Prefix: /usr
-BuildRoot: /usr/tmp/Glide
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 This library allows the user to use a 3dfx Interactive Voodoo Banshee or Voodoo3 card under Linux.
