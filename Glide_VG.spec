@@ -33,7 +33,7 @@ chmod +x swlibs/include/make/ostype
 
 %build
 %{__make} -f makefile.unix CNODEBUG="$RPM_OPT_FLAGS -fomit-frame-pointer \
-	-funroll-loops -fexpensive-optimizations -ffast-math"
+	-funroll-loops -fexpensive-optimizations -ffast-math -I/usr/X11R6/include"
 
 %install
 rm -rf $RPM_BUILD_ROOT
