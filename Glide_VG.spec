@@ -11,6 +11,7 @@ Source0:	Glide%{version}.tar.gz
 Patch0:		%{name}-asm.patch
 Patch1:		%{name}-opt.patch
 Patch2:		%{name}-morearchs.patch
+Patch3:		%{name}-ioctl.patch
 Icon:		3dfx.gif
 URL:		http://www.3dfx.com/
 %ifarch %{ix86}
@@ -48,6 +49,7 @@ Voodoo Graphics, Voodoo Rush lub Voodoo2.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 chmod +x swlibs/include/make/ostype
 
 %build
