@@ -1,0 +1,110 @@
+--- Glide_VG-2.46/swlibs/fxpci/pcilib/fxpci.c.orig	2005-04-18 22:45:59.647024112 +0000
++++ Glide_VG-2.46/swlibs/fxpci/pcilib/fxpci.c	2005-04-18 22:49:41.756258376 +0000
+@@ -1541,10 +1541,10 @@
+ 
+ 
+ #ifdef __linux__
++static FxBool pciOpen2();
+ 
+ FX_EXPORT FxBool FX_CSTYLE
+ pciOpen( void ) {
+-  static FxBool pciOpen2();
+   int deviceNumber;
+   
+   if ( libraryInitialized ) return FXTRUE;
+--- Glide_VG-2.46/sst1/init/init96/init96.c~	1999-11-29 19:48:02.000000000 +0000
++++ Glide_VG-2.46/sst1/init/init96/init96.c	2005-04-18 23:09:42.158769456 +0000
+@@ -660,6 +660,9 @@
+   return(FXTRUE);
+ }
+ 
++static void init96SetupRendering(InitRegisterDesc *regDesc,
++								 GrScreenResolution_t sRes);
++
+ /*-------------------------------------------------------------------
+   Function: init96MapBoard
+   Date: 10/17
+@@ -759,8 +762,6 @@
+   {
+     FxBool rv=FXTRUE;
+     GrScreenResolution_t    res = GR_RESOLUTION_640x480;
+-    static void init96SetupRendering(InitRegisterDesc *regDesc,
+-				     GrScreenResolution_t sRes);
+ 
+     if (curHALData->initAperture)
+       (*curHALData->initAperture)(regDesc);
+--- Glide_VG-2.46/sst1/glide/tests/display.c~	1999-11-29 19:48:23.000000000 +0000
++++ Glide_VG-2.46/sst1/glide/tests/display.c	2005-04-18 23:11:49.442419400 +0000
+@@ -67,6 +67,11 @@
+     "GR_LFB_SRC_FMT_ZA16      "
+ };
+ 
++static void imageConvert( void *dst, 
++						  void *src,
++						  GrLfbSrcFmt_t format, 
++						  FxU32 *bpp );
++
+ 
+ void main( int argc, char **argv) {
+     char match; 
+@@ -92,11 +97,6 @@
+     static FxU32 imageWidth;
+     static FxU32 imageHeight;
+ 
+-    static void imageConvert( void *dst, 
+-                              void *src,
+-                              GrLfbSrcFmt_t format, 
+-                              FxU32 *bpp );
+-
+     srcfname[0] = 0;
+     dstfname[0] = 0;
+ 
+--- Glide_VG-2.46/sst1/init/init.c.orig	2005-04-18 23:25:31.088510208 +0000
++++ Glide_VG-2.46/sst1/init/init.c	2005-04-18 23:30:01.885342832 +0000
+@@ -23,6 +23,7 @@
+ **
+ */
+ 
++#define ziew
+ 
+ #include "init.h"
+ #include "fxinit.h"
+--- Glide_VG-2.46/swlibs/fxpci/pcilib/fxpci.h~	2005-04-18 23:22:15.372263600 +0000
++++ Glide_VG-2.46/swlibs/fxpci/pcilib/fxpci.h	2005-04-18 23:30:11.195927408 +0000
+@@ -59,8 +59,10 @@
+ } PciRegister;
+ 
+ #ifndef KERNEL
++#ifndef ziew
+ extern const PciRegister PCI_VENDOR_ID;     
+ extern const PciRegister PCI_DEVICE_ID;     
++#endif
+ extern const PciRegister PCI_COMMAND;       
+ extern const PciRegister PCI_STATUS;
+ extern const PciRegister PCI_REVISION_ID;
+--- Glide_VG-2.46/sst1/glide/tests/test26.c~	1999-11-29 19:48:23.000000000 +0000
++++ Glide_VG-2.46/sst1/glide/tests/test26.c	2005-04-18 23:35:02.478645704 +0000
+@@ -59,6 +59,11 @@
+   "GR_LFB_SRC_FMT_ZA16      "
+ };
+ 
++static void imageConvert( void *dst, 
++							void *src,
++                            GrLfbSrcFmt_t format, 
++                            FxU32 *bpp );
++
+ 
+ void main( int argc, char **argv) {
+   char match; 
+@@ -82,11 +87,6 @@
+   static FxU32 imageWidth;
+   static FxU32 imageHeight;
+ 
+-  static void imageConvert( void *dst, 
+-                            void *src,
+-                            GrLfbSrcFmt_t format, 
+-                            FxU32 *bpp );
+-
+   /* Process Command Line Arguments */
+   while( rv = tlGetOpt( argc, argv, "bdnr", &match, &remArgs ) ) {
+     if ( rv == -1 ) {
