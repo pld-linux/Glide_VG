@@ -14,7 +14,6 @@ Patch2:		%{name}-morearchs.patch
 Patch3:		%{name}-ioctl.patch
 Patch4:		%{name}-soname.patch
 Patch5:		%{name}-C_brainos.patch
-Icon:		3dfx.gif
 URL:		http://www.3dfx.com/
 %ifarch %{ix86}
 BuildRequires:	/usr/bin/gasp
