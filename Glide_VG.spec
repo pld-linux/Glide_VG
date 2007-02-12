@@ -1,5 +1,5 @@
 Summary:	Glide runtime for 3Dfx Voodoo Graphics boards
-Summary(pl.UTF-8):   Środowisko Glide dla kart 3Dfx Voodoo Graphics
+Summary(pl.UTF-8):	Środowisko Glide dla kart 3Dfx Voodoo Graphics
 Name:		Glide_VG
 Version:	2.46
 Release:	9
@@ -31,7 +31,7 @@ pod Linuksem.
 
 %package -n Glide2x_SDK
 Summary:	Development libraries for Glide 2.x
-Summary(pl.UTF-8):   Część Glide 2.x przeznaczona dla programistów
+Summary(pl.UTF-8):	Część Glide 2.x przeznaczona dla programistów
 Version:	2.1
 Group:		Development/Libraries
 
