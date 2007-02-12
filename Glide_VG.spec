@@ -1,5 +1,5 @@
 Summary:	Glide runtime for 3Dfx Voodoo Graphics boards
-Summary(pl):	¦rodowisko Glide dla kart 3Dfx Voodoo Graphics
+Summary(pl.UTF-8):   Åšrodowisko Glide dla kart 3Dfx Voodoo Graphics
 Name:		Glide_VG
 Version:	2.46
 Release:	9
@@ -25,13 +25,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This library allows the user to use a 3Dfx Interactive Voodoo Graphics
 card under Linux.
 
-%description -l pl
-Ten pakiet pozwala na u¿ywanie kart 3Dfx Interactive Voodoo Graphics
+%description -l pl.UTF-8
+Ten pakiet pozwala na uÅ¼ywanie kart 3Dfx Interactive Voodoo Graphics
 pod Linuksem.
 
 %package -n Glide2x_SDK
 Summary:	Development libraries for Glide 2.x
-Summary(pl):	Czê¶æ Glide 2.x przeznaczona dla programistów
+Summary(pl.UTF-8):   CzÄ™Å›Ä‡ Glide 2.x przeznaczona dla programistÃ³w
 Version:	2.1
 Group:		Development/Libraries
 
@@ -40,9 +40,9 @@ This package includes the headers files, documentation, and test files
 necessary for developing applications that use the 3Dfx Interactive
 Voodoo Graphics, Voodoo Rush, or Voodoo2 card.
 
-%description -n Glide2x_SDK -l pl
-Ten pakiet zawiera pliki nag³ówkowe, dokumentacjê i pliki testowe
-potrzebne do tworzenia aplikacji u¿ywaj±cych kart 3Dfx Interactive
+%description -n Glide2x_SDK -l pl.UTF-8
+Ten pakiet zawiera pliki nagÅ‚Ã³wkowe, dokumentacjÄ™ i pliki testowe
+potrzebne do tworzenia aplikacji uÅ¼ywajÄ…cych kart 3Dfx Interactive
 Voodoo Graphics, Voodoo Rush lub Voodoo2.
 
 %prep
