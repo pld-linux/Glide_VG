@@ -4,7 +4,6 @@ Name:		Glide_VG
 Version:	2.46
 Release:	10
 License:	3DFX GLIDE Source Code General Public License
-Vendor:		3Dfx Interactive Inc.
 Group:		Libraries
 Source0:	Glide%{version}.tar.gz
 # Source0-md5:	be7762636b46cb04b238a16f45cfcfa8
@@ -14,11 +13,13 @@ Patch2:		%{name}-morearchs.patch
 Patch3:		%{name}-ioctl.patch
 Patch4:		%{name}-soname.patch
 Patch5:		%{name}-C_brainos.patch
-URL:		http://www.3dfx.com/
+URL:		http://glide.sourceforge.net/
 %ifarch %{ix86}
 BuildRequires:	/usr/bin/gasp
 %endif
-BuildRequires:	XFree86-devel
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXxf86dga-devel
+BuildRequires:	xorg-lib-libXxf86vm-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -58,7 +59,7 @@ chmod +x swlibs/include/make/ostype
 %build
 %{__make} -j1 -f makefile.unix \
 	CNODEBUG="%{rpmcflags} -fPIC %{!?debug:-fomit-frame-pointer} \
-	%{!?debug:-funroll-loops -fexpensive-optimizations -ffast-math} -I/usr/X11R6/include" \
+	%{!?debug:-funroll-loops -fexpensive-optimizations -ffast-math}" \
 %ifnarch %{ix86}
 	FX_GLIDE_CTRISETUP=1
 %endif
@@ -113,7 +114,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc glide_license.txt
+%doc glide_license.txt readme.txt
 %attr(755,root,root) %{_bindir}/texus
 %attr(755,root,root) %{_bindir}/test3Dfx
 %attr(755,root,root) %{_libdir}/libglide2x.so
