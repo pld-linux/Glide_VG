@@ -1,0 +1,2 @@
+- updated soname patch to use sonames compatible with later versions of glide2x
+  (libglide.so.2, libtexus.so.1); keep libglide2x.so, libtexus.so symlinks
