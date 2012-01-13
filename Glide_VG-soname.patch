@@ -1,10 +1,72 @@
 --- Glide_VG-2.46/swlibs/include/make/3dfx.mak.orig	1999-11-29 20:48:02.000000000 +0100
-+++ Glide_VG-2.46/swlibs/include/make/3dfx.mak	2004-04-24 17:27:44.802468880 +0200
-@@ -194,6 +194,7 @@
++++ Glide_VG-2.46/swlibs/include/make/3dfx.mak	2012-01-13 16:34:50.994605338 +0100
+@@ -192,8 +192,15 @@
+ $(LIBRARIES): $(LIBPARTS)
+ 	$(AR) $*.a $(LIBPARTS)
  
++# We need to glean the soname from the name of the library, this
++# is pretty good as long as shared library names are reasonable.
++ifneq "$(SHARED_LIBRARY)" ""
++SONAME := $(shell echo $(SHARED_LIBRARY) | cut -d "." -f 1-3)
++BASENAME := $(shell echo $(SHARED_LIBRARY) | cut -d "." -f 1-2)
++endif
++
  $(SHARED_LIBRARY): $(LIBPARTS) $(SUBLIBRARIES)
- 	$(LINK) $(LDFLAGS) -shared -o $(SHARED_LIBRARY) \
-+		-Xlinker -soname=$(SHARED_LIBRARY) \
+-	$(LINK) $(LDFLAGS) -shared -o $(SHARED_LIBRARY) \
++	$(LINK) $(LDFLAGS) -shared -Wl,-soname,$(SONAME) -o $(SHARED_LIBRARY) \
  		-Xlinker --whole-archive \
  		$(LIBRARIES) $(SUBLIBRARIES) \
  		-Xlinker --no-whole-archive \
+@@ -205,6 +212,8 @@
+ 	$(INSTALL) -m 444 $(LIBRARIES) $(INSTALL_DESTINATION)/lib
+ ifneq "$(SHARED_LIBRARY)" ""
+ 	$(INSTALL) -m 444 $(SHARED_LIBRARY) $(INSTALL_DESTINATION)/lib
++	ln -sf $(INSTALL_DESTINATION)/lib/$(SHARED_LIBRARY) $(INSTALL_DESTINATION)/lib/$(SONAME)
++	ln -sf $(INSTALL_DESTINATION)/lib/$(SHARED_LIBRARY) $(INSTALL_DESTINATION)/lib/$(BASENAME)
+ endif
+ else
+ 	@echo INSTALL_DESTINATION not defined, not installing LIBRARIES
+--- Glide_VG-2.46/sst1/glide/src/makefile.unix.orig	1999-11-29 20:48:01.000000000 +0100
++++ Glide_VG-2.46/sst1/glide/src/makefile.unix	2012-01-13 16:03:17.497875271 +0100
+@@ -167,7 +167,7 @@
+ LDIRT     = fxgasm.o fxgasm fxgasm.h
+ 
+ LIBRARIES	    = libglide2x.a
+-SHARED_LIBRARY      = libglide2x.so
++SHARED_LIBRARY      = libglide.so.2.46
+ 
+ include $(BUILD_ROOT_SWLIBS)/include/make/3dfx.mak
+ 
+--- Glide_VG-2.46/swlibs/texus/lib/makefile.unix.orig	1999-11-29 20:48:02.000000000 +0100
++++ Glide_VG-2.46/swlibs/texus/lib/makefile.unix	2012-01-13 16:01:55.061205846 +0100
+@@ -41,7 +41,7 @@
+ INSTALL_DESTINATION = $(BUILD_ROOT_SWLIBS)
+ 
+ LIBRARIES = libtexus.a
+-SHARED_LIBRARY = libtexus.so
++SHARED_LIBRARY = libtexus.so.1.1
+ SUBLIBRARIES = $(BUILD_ROOT_SWLIBS)/lib/libfxmisc.a
+ 
+ include $(BUILD_ROOT_SWLIBS)/include/make/3dfx.mak
+--- Glide_VG-2.46/swlibs/texus/examples/makefile.unix.orig	1999-11-29 20:48:02.000000000 +0100
++++ Glide_VG-2.46/swlibs/texus/examples/makefile.unix	2012-01-13 16:39:48.564615304 +0100
+@@ -23,7 +23,7 @@
+ LCINCS  = -I$(BUILD_ROOT_SST1)/include \
+           -I$(BUILD_ROOT_SWLIBS)/include
+ 
+-LLDLIBS = -lglide2x -ltexus
++LLDLIBS = -lglide -ltexus
+ 
+ INSTALL_DESTINATION = $(BUILD_ROOT_SWLIBS)
+ CFILES  =       viewppm.c view3df.c
+--- Glide_VG-2.46/sst1/glide/tests/makefile.unix.orig	1999-11-29 20:48:23.000000000 +0100
++++ Glide_VG-2.46/sst1/glide/tests/makefile.unix	2012-01-13 16:39:21.777947740 +0100
+@@ -20,7 +20,7 @@
+ 
+ LIBOBJS = tlib.o plib.o
+ 
+-LLDLIBS = $(LIBOBJS) -lglide2x
++LLDLIBS = $(LIBOBJS) -lglide
+ 
+ PRIVATE_HEADERS = tlib.h tlib.c plib.h plib.c tldata.inc
+ 
