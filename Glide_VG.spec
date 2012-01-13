@@ -33,7 +33,6 @@ pod Linuksem.
 %package -n Glide2x_SDK
 Summary:	Development libraries for Glide 2.x
 Summary(pl.UTF-8):	Część Glide 2.x przeznaczona dla programistów
-Version:	2.1
 Group:		Development/Libraries
 
 %description -n Glide2x_SDK
@@ -68,7 +67,7 @@ chmod +x swlibs/include/make/ostype
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir},%{_includedir}/glide} \
-	$RPM_BUILD_ROOT%{_examplesdir}/glide/{tests,texus/{lib,cmd,examples}}
+	$RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/{tests,texus/{lib,cmd,examples}}
 
 # Install the glibc 2.1 libraries normally
 install sst1/lib/libglide.so.2.46 $RPM_BUILD_ROOT%{_libdir}
@@ -93,22 +92,22 @@ install swlibs/include/linutil.h $RPM_BUILD_ROOT%{_includedir}/glide
 install swlibs/include/texus.h $RPM_BUILD_ROOT%{_includedir}/glide
 
 # Install the examples and their source
-install sst1/glide/tests/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide/tests/makefile
-install sst1/glide/tests/*.3df $RPM_BUILD_ROOT%{_examplesdir}/glide/tests
-install sst1/glide/tests/test??.c $RPM_BUILD_ROOT%{_examplesdir}/glide/tests
-install sst1/glide/tests/tldata.inc $RPM_BUILD_ROOT%{_examplesdir}/glide/tests
-install sst1/glide/tests/tlib.[ch] $RPM_BUILD_ROOT%{_examplesdir}/glide/tests
-gzip -9nf $RPM_BUILD_ROOT%{_examplesdir}/glide/tests/*.3df
+install sst1/glide/tests/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/tests/makefile
+install sst1/glide/tests/*.3df $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/tests
+install sst1/glide/tests/test??.c $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/tests
+install sst1/glide/tests/tldata.inc $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/tests
+install sst1/glide/tests/tlib.[ch] $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/tests
+gzip -9nf $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/tests/*.3df
 
 # Install the texture tools source
-install swlibs/texus/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/makefile
-install swlibs/texus/lib/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/lib/makefile
-install swlibs/texus/cmd/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/cmd/makefile
-install swlibs/texus/examples/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/examples/makefile
-install swlibs/texus/lib/*.c $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/lib
-install swlibs/texus/lib/texusint.h $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/lib
-install swlibs/texus/cmd/*.c $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/cmd
-install swlibs/texus/examples/*.c $RPM_BUILD_ROOT%{_examplesdir}/glide/texus/examples
+install swlibs/texus/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/makefile
+install swlibs/texus/lib/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/lib/makefile
+install swlibs/texus/cmd/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/cmd/makefile
+install swlibs/texus/examples/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/examples/makefile
+install swlibs/texus/lib/*.c $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/lib
+install swlibs/texus/lib/texusint.h $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/lib
+install swlibs/texus/cmd/*.c $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/cmd
+install swlibs/texus/examples/*.c $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/examples
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -131,5 +130,5 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Glide2x_SDK
 %defattr(644,root,root,755)
 %doc docs/*.pdf
-%{_examplesdir}/glide
+%{_examplesdir}/glide2x-%{version}
 %{_includedir}/glide
