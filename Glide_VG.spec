@@ -67,8 +67,7 @@ chmod +x swlibs/include/make/ostype
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir},%{_includedir}/glide} \
-	$RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/{tests,texus/{lib,cmd,examples}}
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir}}
 
 # Install the glibc 2.1 libraries normally
 install sst1/lib/libglide.so.2.46 $RPM_BUILD_ROOT%{_libdir}
@@ -82,6 +81,10 @@ ln -sf libtexus.so.1 $RPM_BUILD_ROOT%{_libdir}/libtexus.so
 # Install the executables
 install swlibs/bin/texus $RPM_BUILD_ROOT%{_bindir}
 install sst1/glide/tests/test00 $RPM_BUILD_ROOT%{_bindir}/test3Dfx
+
+### SDK
+install -d $RPM_BUILD_ROOT%{_includedir}/glide \
+	$RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/{tests,texus/examples}
 
 # Install the headers
 install swlibs/include/3dfx.h $RPM_BUILD_ROOT%{_includedir}/glide
@@ -102,13 +105,7 @@ install sst1/glide/tests/tlib.[ch] $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{vers
 gzip -9nf $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/tests/*.3df
 
 # Install the texture tools source
-install swlibs/texus/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/makefile
-install swlibs/texus/lib/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/lib/makefile
-install swlibs/texus/cmd/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/cmd/makefile
 install swlibs/texus/examples/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/examples/makefile
-install swlibs/texus/lib/*.c $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/lib
-install swlibs/texus/lib/texusint.h $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/lib
-install swlibs/texus/cmd/*.c $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/cmd
 install swlibs/texus/examples/*.c $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/examples
 
 %clean
