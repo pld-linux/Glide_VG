@@ -34,6 +34,7 @@ pod Linuksem.
 Summary:	Development libraries for Glide 2.x
 Summary(pl.UTF-8):	Część Glide 2.x przeznaczona dla programistów
 Group:		Development/Libraries
+Conflicts:	Glide_SDK
 
 %description -n Glide2x_SDK
 This package includes the headers files, documentation, and test files
