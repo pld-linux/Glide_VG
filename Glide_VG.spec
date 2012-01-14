@@ -74,6 +74,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir},%{_includedir}/glide} \
 install sst1/lib/libglide.so.2.46 $RPM_BUILD_ROOT%{_libdir}
 ln -sf libglide.so.2.46 $RPM_BUILD_ROOT%{_libdir}/libglide.so.2
 ln -sf libglide.so.2 $RPM_BUILD_ROOT%{_libdir}/libglide2x.so
+ln -sf libglide.so.2 $RPM_BUILD_ROOT%{_libdir}/libglide.so
 install swlibs/lib/libtexus.so.1.1 $RPM_BUILD_ROOT%{_libdir}
 ln -sf libtexus.so.1.1 $RPM_BUILD_ROOT%{_libdir}/libtexus.so.1
 ln -sf libtexus.so.1 $RPM_BUILD_ROOT%{_libdir}/libtexus.so
@@ -123,6 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/test3Dfx
 %attr(755,root,root) %{_libdir}/libglide.so.2.46
 %attr(755,root,root) %ghost %{_libdir}/libglide.so.2
+%attr(755,root,root) %{_libdir}/libglide.so
 %attr(755,root,root) %{_libdir}/libglide2x.so
 %attr(755,root,root) %{_libdir}/libtexus.so.1.1
 %attr(755,root,root) %ghost %{_libdir}/libtexus.so.1
