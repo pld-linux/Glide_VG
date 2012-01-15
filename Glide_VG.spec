@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_with	glide2_sdk	# build Glide2x_SDK here (normally built from Glide_V3.spec)
+#
 Summary:	Glide runtime for 3Dfx Voodoo Graphics boards
 Summary(pl.UTF-8):	Środowisko Glide dla kart 3Dfx Voodoo Graphics
 Name:		Glide_VG
@@ -30,8 +34,24 @@ card under Linux.
 Ten pakiet pozwala na używanie kart 3Dfx Interactive Voodoo Graphics
 pod Linuksem.
 
+%package devel
+Summary:	Development package for Glide 2.x built for Voodoo Graphics
+Summary(pl.UTF-8):	Pakiet programistyczny dla Glide 2.x zbudowanego dla Voodoo Graphics
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+Requires:	Glide2x_SDK >= %{version}
+Provides:	Glide2x-devel
+
+%description devel
+Development package for Glide 2.x built for 3Dfx Interactive Voodoo
+Graphics adapters.
+
+%description devel -l pl.UTF-8
+Pakiet programistyczny dla Glide 2.x zbudowanego dla kart 3Dfx
+Interactive Voodoo Graphics.
+
 %package -n Glide2x_SDK
-Summary:	Development libraries for Glide 2.x
+Summary:	Development files for Glide 2.x
 Summary(pl.UTF-8):	Część Glide 2.x przeznaczona dla programistów
 Group:		Development/Libraries
 Conflicts:	Glide_SDK
@@ -82,6 +102,7 @@ ln -sf libtexus.so.1 $RPM_BUILD_ROOT%{_libdir}/libtexus.so
 install swlibs/bin/texus $RPM_BUILD_ROOT%{_bindir}
 install sst1/glide/tests/test00 $RPM_BUILD_ROOT%{_bindir}/test3Dfx
 
+%if %{with glide2_sdk}
 ### SDK
 install -d $RPM_BUILD_ROOT%{_includedir}/glide \
 	$RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/{tests,texus/examples}
@@ -107,6 +128,7 @@ gzip -9nf $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/tests/*.3df
 # Install the texture tools source
 install swlibs/texus/examples/makefile.distrib $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/examples/makefile
 install swlibs/texus/examples/*.c $RPM_BUILD_ROOT%{_examplesdir}/glide2x-%{version}/texus/examples
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -121,14 +143,19 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/test3Dfx
 %attr(755,root,root) %{_libdir}/libglide.so.2.46
 %attr(755,root,root) %ghost %{_libdir}/libglide.so.2
-%attr(755,root,root) %{_libdir}/libglide.so
 %attr(755,root,root) %{_libdir}/libglide2x.so
 %attr(755,root,root) %{_libdir}/libtexus.so.1.1
 %attr(755,root,root) %ghost %{_libdir}/libtexus.so.1
 %attr(755,root,root) %{_libdir}/libtexus.so
 
+%files devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libglide.so
+
+%if %{with glide2_sdk}
 %files -n Glide2x_SDK
 %defattr(644,root,root,755)
 %doc docs/*.pdf
-%{_examplesdir}/glide2x-%{version}
 %{_includedir}/glide
+%{_examplesdir}/glide2x-%{version}
+%endif
