@@ -40,7 +40,7 @@ Summary(pl.UTF-8):	Pakiet programistyczny dla Glide 2.x zbudowanego dla Voodoo G
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	Glide2x_SDK >= %{version}
-Provides:	Glide2x-devel
+Provides:	Glide2x-devel = %{version}
 
 %description devel
 Development package for Glide 2.x built for 3Dfx Interactive Voodoo
