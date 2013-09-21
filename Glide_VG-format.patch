@@ -1,0 +1,75 @@
+--- Glide_VG-2.46/swlibs/fxmisc/fximg.c.orig	1999-11-29 20:48:02.000000000 +0100
++++ Glide_VG-2.46/swlibs/fxmisc/fximg.c	2013-09-21 13:04:59.228788362 +0200
+@@ -1879,8 +1879,8 @@
+ 	    char buf[1024], *p;
+ 	    strcpy(buf,prefix);			// copy and replace semicolon
+ 	    if (p = strchr(buf,';')) *p = '\0';
+-	    fprintf(stderr,buf);
+-	    fprintf(stderr,"/");
++	    fputs(buf,stderr);
++	    fputs("/",stderr);
+ 	}
+ 	fprintf (stderr,"%s (%dx%d) ...", filename, info->any.width,info->any.height);
+ 	fflush(stderr);
+--- Glide_VG-2.46/swlibs/fxpci/pcilib/fxpci.c.orig	2013-09-21 13:02:16.251214671 +0200
++++ Glide_VG-2.46/swlibs/fxpci/pcilib/fxpci.c	2013-09-21 13:06:03.351768212 +0200
+@@ -2631,7 +2631,7 @@
+     OutputDebugString(msg);
+ #elif defined(MAPPL_MAPMEM_MINIPORT)
+ #elif defined(MAPPL_LINUX)
+-    fprintf(stderr, msg);
++    fputs(msg, stderr);
+ #else
+ #error "Unknown PCI target for pciOutputDebugString"
+ #endif
+--- Glide_VG-2.46/swlibs/fxpci/pcilib/fxlinux.c.orig	2013-09-21 13:06:52.450716558 +0200
++++ Glide_VG-2.46/swlibs/fxpci/pcilib/fxlinux.c	2013-09-21 13:10:57.885455498 +0200
+@@ -64,7 +64,7 @@
+ }
+ 
+ FxBool pciOutputDebugStringDD(const char *msg) {
+-  printf(msg);
++  fputs(msg,stdout);
+   return FXTRUE;
+ }
+ 
+--- Glide_VG-2.46/swlibs/fxpci/pcitools/pcirw.c.orig	1999-11-29 20:48:02.000000000 +0100
++++ Glide_VG-2.46/swlibs/fxpci/pcitools/pcirw.c	2013-09-21 13:41:51.784954404 +0200
+@@ -76,7 +76,7 @@
+     FxU32 classCode = 0;
+ 
+     if (!pciOpen()) {
+-        fprintf(stderr, pciGetErrorString());
++        fputs(pciGetErrorString(), stderr);
+         exit(100);
+     }
+     for ( deviceNumber = 0; deviceNumber < MAX_PCI_DEVICES; deviceNumber++ ) {
+@@ -329,7 +329,7 @@
+     // cleanup: unmap the card, close down the PCI bus and return
+     pciUnmapPhysical( (unsigned long)sst, sizeOfCard );
+     if ( !pciClose() ) {
+-        fprintf(stderr, pciGetErrorString());
++        fputs(pciGetErrorString(), stderr);
+         exit(3);
+     }
+     return 0;
+--- Glide_VG-2.46/sst1/glide/tests/tlib.c.orig	1999-11-29 20:48:23.000000000 +0100
++++ Glide_VG-2.46/sst1/glide/tests/tlib.c	2013-09-21 13:42:46.624171915 +0200
+@@ -1433,7 +1433,7 @@
+ 
+ FxBool
+ tlErrorMessage( char *err) {
+-  fprintf(stderr, err);
++  fputs(err, stderr);
+ } /* tlErrorMessage */
+ 
+ #else
+@@ -1472,7 +1472,7 @@
+ 
+ FxBool
+ tlErrorMessage( char *err) {
+-  fprintf(stderr, err);
++  fputs(err, stderr);
+ } /* tlErrorMessage */
+ 
+ #else   /* __WIN32__ */
