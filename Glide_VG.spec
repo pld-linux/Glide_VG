@@ -82,8 +82,9 @@ chmod +x swlibs/include/make/ostype
 
 %build
 %{__make} -j1 -f makefile.unix \
+	AR="ar rcs" \
 	CC="%{__cc}" \
-	CNODEBUG="%{rpmcflags} -fPIC %{!?debug:-fomit-frame-pointer} \
+	CNODEBUG="%{rpmcflags} -fPIC -Wno-missing-braces %{!?debug:-fomit-frame-pointer} \
 	%{!?debug:-funroll-loops -fexpensive-optimizations -ffast-math}" \
 %ifnarch %{ix86}
 	FX_GLIDE_CTRISETUP=1
